@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chat Motivacional</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #e9f0f7; 
+      padding: 20px; 
+      display: flex; 
+      justify-content: center;
+    }
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    h1 {
+      background: #0077cc;
+      color: white;
+      padding: 15px;
+      margin: 0;
+      text-align: center;
+    }
+    #messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      max-height: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg {
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    .user {
+      background: #d1e7ff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+    .bot {
+      background: #f1f1f1;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+    form {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+    form input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    form button {
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h1>💬 Chat Motivacional</h1>
+
+    <div id="messages">
+      <% @messages.each do |m| %>
+        <% if m[:name] == "Cláudia 🤖" %>
+          <div class="msg bot"><strong><%= m[:name] %>:</strong> <%= m[:msg] %></div>
+        <% else %>
+          <div class="msg user"><strong><%= m[:name] %>:</strong> <%= m[:msg] %></div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <form action="/send" method="post">
+      <input type="text" name="name" placeholder="Seu nome">
+      <input type="text" name="msg" placeholder="Digite uma mensagem">
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</body>
+</html>
