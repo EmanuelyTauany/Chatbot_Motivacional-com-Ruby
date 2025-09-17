@@ -1,6 +1,6 @@
 # Chatbot Motivacional com Ruby
 
-Um chatbot simples desenvolvido em **Ruby** que envia mensagens motivacionais ao usuário. Ideal para treinar Ruby, criar automações ou apenas receber doses de motivação no terminal.
+Um chatbot simples desenvolvido em **Ruby** que envia mensagens motivacionais ao usuário. 
 
 ---
 
@@ -30,3 +30,4 @@ Para verificar se o Ruby está instalado:
 
 ```bash
 ruby -v
+
