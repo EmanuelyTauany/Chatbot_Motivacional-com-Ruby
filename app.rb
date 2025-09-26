@@ -5,9 +5,6 @@ require 'json'
 set :bind, '0.0.0.0'
 enable :sessions
 
-# -----------------------
-# Listas de respostas expandidas
-# -----------------------
 MOTIVATIONAL_QUOTES = [
   "Acredite em si mesmo! 💪",
   "Você é mais capaz do que imagina! ✨",
@@ -29,77 +26,129 @@ CUSTOM_RESPONSES = {
     "Mesmo que agora as coisas pareçam escuras, nunca se esqueça de que a noite sempre dá lugar ao amanhecer. 🌅 Você tem uma luz dentro de si, e ela nunca se apaga, mesmo quando você não consegue enxergá-la. 🌟",
     "Você pode estar se sentindo frágil, mas lembre-se: até as árvores mais fortes já enfrentaram tempestades. 🌳 Essa fase é passageira, e o que você sente agora não vai te acompanhar para sempre. Continue caminhando, mesmo devagar. 👣"
   ],
+  suicida: [
+    "🆘 PARE um momento. Sua vida tem valor imenso, mesmo que agora você não consiga ver isso. LIGUE AGORA para o CVV: 188 (gratuito, 24h). Você não está sozinho(a). 💙",
+    "🚨 Eu me importo com você e sua vida é preciosa! CVV: 188 ou chat em cvv.org.br. Por favor, dê uma chance para as coisas melhorarem. Você merece viver! 🌟",
+    "💙 Seu sofrimento é real, mas sua vida tem um valor que vai muito além desse momento de dor. Converse com alguém: CVV 188, CAPS da sua cidade, ou vá ao hospital mais próximo. Você é importante! 🤗",
+    "🆘 URGENTE: Se você está pensando em se machucar, procure ajuda AGORA! CVV: 188, SAMU: 192, ou pronto-socorro. Sua vida importa mais do que você imagina. 💪❤️"
+  ],
+  autolesao: [
+    "💔 Eu vejo sua dor e ela é real. Mas machucar seu corpo não vai curar a dor emocional. Tente alternativas: apertar gelo, desenhar na pele com caneta vermelha, ou gritar no travesseiro. CVV: 188 🤗",
+    "🩹 Entendo que a dor física às vezes parece aliviar a emocional, mas você merece cuidado e carinho. Converse com alguém de confiança ou ligue para o CVV: 188. 💙",
+    "⚠️ Se machucar não resolve a causa da sua dor, apenas adiciona mais sofrimento. Experimente exercício físico intenso, banho frio/quente, ou escrever tudo que sente. Procure ajuda: CVV 188 🌱",
+    "🛡️ Seu corpo é seu templo. CAPS, psicólogos e o CVV (188) existem para te apoiar. Você não precisa passar por isso sozinho(a)! 💪✨"
+  ],
+  desesperanca: [
+    "🌅 Eu sei que agora tudo parece sem saída, mas a desesperança é como um nevoeiro - parece densa e eterna, mas sempre se dissipa. Você já sobreviveu a 100% dos seus piores dias até agora. 💪",
+    "💎 Mesmo no fundo do poço, existe a possibilidade de encontrar diamantes. Mudanças acontecem quando menos esperamos. Procure ajuda! 🤗",
+    "🔥 A esperança não morreu, ela apenas está dormindo dentro de você. Converse com alguém: amigo, família, CVV (188), ou profissional. Pequenos passos levam a grandes mudanças! 👣✨",
+    "🌱 Dentro de você existe uma semente de possibilidades infinitas. Procure ajuda e deixe alguém te ajudar a regar essa semente. 🌸"
+  ],
+  solidao: [
+    "🤗 A solidão dói, eu entendo. Mas saiba que existem pessoas que se importam com você. Comece pequeno: mande mensagem, participe de grupos ou ligue para CVV (188). 💙",
+    "👥 Sentir-se sozinho(a) não significa que você está só. Voluntariado, grupos de apoio, comunidades online... encontre sua tribo! 🌟",
+    "💌 Sua presença faz diferença no mundo. Tente se conectar: escrever para um amigo, atividades locais ou grupos com interesses em comum. ✨",
+    "🏠 A solidão é um sentimento, não um fato permanente. CVV (188), redes sociais positivas, ou cuidar de uma planta ajudam a se reconectar. 🌱"
+  ],
   cansado: [
-    "Sei que você deve estar exausto, mas não esqueça que descansar também faz parte da jornada. 🛌 Seu corpo e sua mente precisam de pausas para se renovarem, e tudo o que você conquistou até aqui já mostra a sua força. Permita-se recuperar suas energias, sem culpa. 🌿",
-    "Você já fez muito até agora, e está tudo bem se precisar desacelerar um pouco. ⚡ Até as máquinas precisam de recarga para continuar funcionando, e você merece esse cuidado. Respire fundo, faça uma pausa e valorize cada pequena vitória que alcançou. ✨",
-    "O cansaço pode estar pesando, mas não esqueça que ele é sinal de esforço e dedicação. 💪 Orgulhe-se da sua caminhada até aqui. Aproveite esse momento para relaxar, se hidratar e se permitir ser gentil consigo mesmo. 🍵",
-    "Seu corpo e sua mente estão pedindo descanso, e isso não é sinal de fraqueza, mas de sabedoria. 🧘 Lembre-se de que cuidar de si é parte essencial do sucesso. Uma pausa agora pode ser o impulso que você precisa para seguir com ainda mais força depois. 🚀"
+    "Sei que você deve estar exausto, mas descansar faz parte da jornada. 🛌 Seu corpo e mente precisam de pausas para se renovarem. 🌿",
+    "Você já fez muito, está tudo bem desacelerar. ⚡ Respire fundo, faça uma pausa e valorize cada pequena vitória. ✨",
+    "O cansaço é sinal de esforço. 💪 Aproveite para relaxar, se hidratar e ser gentil consigo mesmo. 🍵",
+    "Seu corpo e mente pedem descanso, isso é sabedoria. 🧘 Uma pausa agora é impulso para seguir com mais força depois. 🚀"
   ],
   feliz: [
-    "Que alegria ver você assim! 😄 Sua felicidade ilumina não apenas o seu dia, mas também o de quem está ao seu redor. Continue valorizando os pequenos momentos e espalhando essa energia contagiante. O mundo precisa mais do seu sorriso! 🌈",
-    "A felicidade que você sente agora é um reflexo da sua força interior e da sua jornada. ✨ Aproveite cada segundo, celebre suas conquistas e compartilhe esse brilho com quem você ama. Sua alegria inspira e transforma. 💖",
-    "Sabe o que é lindo? Ver alguém vibrando coisas boas como você está agora. 🌞 A vida fica mais leve quando nos permitimos sentir alegria, e você está mostrando como isso é possível. Continue irradiando essa luz por onde passar! 🌟",
-    "É tão bom sentir essa energia positiva vindo de você! 🎉 Essa felicidade é um combustível poderoso para alcançar ainda mais conquistas. Guarde esse momento no coração e lembre-se dele nos dias em que precisar de força extra. ❤️"
+    "Que alegria ver você assim! 😄 Continue valorizando pequenos momentos e espalhando energia positiva. 🌈",
+    "A felicidade que você sente reflete sua força interior. ✨ Celebre conquistas e compartilhe o brilho com quem ama. 💖",
+    "Ver alguém vibrando coisas boas é lindo. 🌞 Continue irradiando luz! 🌟",
+    "Essa energia positiva é combustível para novas conquistas. 🎉 Guarde esse momento no coração! ❤️"
   ],
   ansioso: [
-    "A ansiedade pode tentar te dominar, mas lembre-se: você tem mais controle do que imagina. 🌬️ Respire fundo, foque no presente e dê um passo de cada vez. Tudo vai se encaixar no momento certo, e você é totalmente capaz de lidar com isso. 🌱",
-    "Quando o coração acelerar e os pensamentos ficarem confusos, pare um instante. 🧘 Inspire profundamente, solte devagar e traga sua mente de volta para o agora. Você não precisa resolver tudo de uma vez — cada pequena ação já faz a diferença. 👣",
-    "A ansiedade não diminui a sua força, pelo contrário, mostra que você se importa. 💖 Mas não deixe que ela dite seu ritmo. Organize seus pensamentos, escolha uma prioridade e siga com calma. Você consegue! ✨",
-    "Mesmo nos momentos de ansiedade, lembre-se de que você já superou situações difíceis antes. ⚡ Essa também vai passar. Acolha seus sentimentos, cuide de si mesmo e confie que dias mais leves estão por vir. 🌈"
+    "A ansiedade pode tentar te dominar, mas você tem mais controle do que imagina. 🌬️ Respire fundo e dê um passo de cada vez. 🌱",
+    "Quando os pensamentos ficarem confusos, pare, inspire, solte e foque no presente. 👣",
+    "A ansiedade não diminui sua força. 💖 Organize pensamentos, escolha uma prioridade e siga com calma. ✨",
+    "Mesmo ansioso(a), lembre-se: você já superou situações difíceis antes. ⚡ Esta também vai passar. 🌈"
   ],
   confuso: [
-    "Tudo bem se sentir perdido às vezes, isso faz parte do processo de crescimento. 🌱 Respire fundo, organize suas ideias e escolha um pequeno passo para seguir adiante. Mesmo a menor das ações já traz clareza para o caminho. 👣",
-    "Não se cobre por não ter todas as respostas agora. 🌟 Muitas vezes, a confusão é apenas o prelúdio de um grande aprendizado. Tenha paciência, confie no seu instinto e siga em frente, mesmo que devagar. 🚶",
-    "A incerteza pode assustar, mas também abre espaço para novas possibilidades. 🌈 Lembre-se de que cada dúvida é um convite para explorar algo novo sobre você e sobre a vida. Você vai encontrar a direção certa no momento certo. ⏳",
-    "Quando tudo parecer nebuloso, dê um tempo para respirar e observar. 🌬️ As respostas costumam aparecer quando paramos de forçar. Você já tem dentro de si a força necessária para transformar confusão em clareza. 💡"
+    "Tudo bem se sentir perdido às vezes. 🌱 Respire, organize ideias e siga um pequeno passo. 👣",
+    "Não se cobre por não ter todas respostas. 🌟 Confusão é prelúdio de aprendizado. 🚶",
+    "A incerteza abre espaço para novas possibilidades. 🌈 Cada dúvida é convite para explorar algo novo. ⏳",
+    "Quando tudo parecer nebuloso, respire e observe. 💡 Você tem força para transformar confusão em clareza."
   ],
   estressado: [
-    "Eu sei que o estresse pode estar pesando, mas tente lembrar que você não precisa carregar tudo sozinho. 🌊 Respire fundo, desacelere e permita-se se desconectar um pouco. Às vezes, uma pausa curta pode mudar completamente sua energia. ✨",
-    "O estresse é sinal de que você está dando o seu melhor, mas também de que precisa cuidar de si. 🌿 Que tal ouvir uma música, alongar o corpo ou dar uma breve caminhada? Coisas simples podem transformar o seu dia. 🎵🚶",
-    "Respire fundo e solte lentamente. 🌬️ Lembre-se de que nem tudo está sob seu controle, e está tudo bem assim. Foque no que você pode mudar agora e deixe o resto fluir. Sua paz vale mais do que qualquer preocupação. 💖",
-    "Cada desafio que causa estresse também traz a oportunidade de mostrar sua resiliência. 💪 Olhe para si mesmo com orgulho, reconheça seu esforço e permita-se descansar quando precisar. Você merece equilíbrio. ⚖️"
+    "O estresse pode estar pesado, mas você não precisa carregar tudo sozinho. 🌊 Respire, desacelere e desconecte-se um pouco. ✨",
+    "O estresse é sinal de esforço. 🌿 Ouça música, alongue-se ou caminhe. 🎵🚶",
+    "Respire fundo e solte lentamente. 🌬️ Foque no que pode mudar e deixe o resto fluir. 💖",
+    "Cada desafio traz oportunidade de mostrar resiliência. 💪 Olhe para si mesmo com orgulho."
   ],
   motivado: [
-    "Essa energia que você sente agora é poderosa! 🔥 Use-a como combustível para transformar seus sonhos em realidade. Dê passos firmes em direção ao que deseja e lembre-se: cada pequena ação já é uma vitória. 🚀",
-    "A motivação que está dentro de você hoje é um presente precioso. ✨ Canalize essa força para conquistar seus objetivos e inspirar quem está ao seu redor. O que você tem em mente é totalmente possível! 🌈",
-    "Continue nesse ritmo, porque sua determinação está transbordando. 💪 Quando estamos motivados, até os maiores desafios parecem menores. Aproveite esse momento e avance com confiança. 🌟",
-    "Aproveite essa chama de motivação para dar vida às suas ideias. 🎯 Tudo o que você precisa já está dentro de você, e cada passo dado agora é um investimento no futuro que você deseja construir. 🌻"
+    "Essa energia é poderosa! 🔥 Transforme sonhos em realidade. Cada passo é vitória. 🚀",
+    "A motivação que sente é presente. ✨ Canalize para objetivos e inspire outros. 🌈",
+    "Continue nesse ritmo. 💪 Desafios parecem menores quando motivado. 🌟",
+    "Use essa chama para dar vida às ideias. 🎯 Cada passo é investimento no futuro. 🌻"
   ],
   agradecido: [
-    "A gratidão é uma força poderosa que transforma qualquer dia comum em algo extraordinário. 🙏 Continue reconhecendo as pequenas coisas boas ao seu redor, pois é delas que nasce a verdadeira felicidade. ✨",
-    "Sinto uma energia incrível ao ver você valorizando as bênçãos da vida. 🌟 Quanto mais gratidão cultivamos, mais motivos encontramos para sorrir. Continue nutrindo esse sentimento lindo dentro de si. 💖",
-    "Um coração grato é um coração leve. 🌈 Reconhecer o que você tem agora abre espaço para ainda mais coisas boas chegarem até você. Continue espalhando essa vibração positiva, ela é contagiante! 🌞",
-    "A gratidão é como uma chave mágica que abre portas para novas oportunidades. 🗝️ Nunca subestime o poder desse sentimento. Continue praticando, pois ele eleva sua vida em todos os aspectos. 🌻"
+    "A gratidão transforma dias comuns em extraordinários. 🙏 Valorize pequenas coisas. ✨",
+    "Sinto energia ao ver você valorizar bênçãos. 🌟 Gratidão atrai mais motivos para sorrir. 💖",
+    "Coração grato é leve. 🌈 Reconhecer agora abre espaço para mais coisas boas. 🌞",
+    "Gratidão abre portas para oportunidades. 🗝️ Continue praticando! 🌻"
   ]
 }
 
+EMERGENCY_CONTACTS = {
+  cvv: "CVV - Centro de Valorização da Vida: 188 (gratuito, 24h)",
+  samu: "SAMU - Emergências médicas: 192",
+  caps: "CAPS - Centro de Atenção Psicossocial (procure o mais próximo)",
+  chat_cvv: "Chat online: cvv.org.br",
+  emergencia: "Emergência geral: 190 (Polícia) ou 193 (Bombeiros)"
+}
 
-DAILY_TIPS = [
-  "Beba água! 💧 Um corpo hidratado ajuda na mente.",
-  "Dê uma caminhada de 10 minutos, oxigênio para o cérebro! 🚶‍♂️",
-  "Escreva seus pensamentos, clareza mental é essencial. 📝",
-  "Medite por 5 minutos, respire e sinta o momento. 🧘",
-  "Ouça sua música favorita, ela eleva o humor. 🎶",
-  "Diga algo positivo para si mesmo hoje! 💖",
-  "Planeje o dia de forma leve e flexível. 📅",
-  "Faça algo criativo, mesmo que pequeno! 🎨",
-  "Sorria para alguém, pequenas gentilezas transformam o dia! 😄",
-  "Leia uma frase inspiradora e reflita sobre ela. ✨"
+CRISIS_ALTERNATIVES = [
+  "Segure cubos de gelo nas mãos até derreter",
+  " Desenhe na pele com caneta vermelha",
+  " Faça exercícios intensos",
+  " Tome banho frio/quente",
+  " Grite no travesseiro",
+  " Escreva tudo que sente",
+  " Ouça música alta e dance",
+  " Ligue para alguém de confiança ou CVV (188)"
 ]
 
-# Novas funcionalidades
+POSITIVE_DISTRACTIONS = [
+  " Assista vídeos engraçados",
+  " Veja fotos de animais fofos",
+  " Saia para observar a natureza",
+  " Leia um livro ou artigo",
+  " Jogue um game relaxante",
+  " Faça palavras cruzadas ou sudoku",
+  " Desenhe ou pinte",
+  " Pratique respiração profunda"
+]
+
+DAILY_TIPS = [
+  "Beba água! ",
+  "Dê uma caminhada de 10 minutos 🚶",
+  "Escreva seus pensamentos ",
+  "Medite por 5 minutos ",
+  "Ouça sua música favorita ",
+  "Diga algo positivo para si mesmo ",
+  "Planeje o dia de forma leve ",
+  "Faça algo criativo ",
+  "Sorria para alguém ",
+  "Leia uma frase inspiradora "
+]
+
 BREATHING_EXERCISES = [
-  "🌬️ Exercício 4-7-8: Inspire por 4 segundos, segure por 7, expire por 8. Repita 3 vezes.",
-  "🫁 Respiração quadrada: Inspire 4s → Segure 4s → Expire 4s → Segure 4s. Faça 5 ciclos.",
-  "🌊 Respiração do oceano: Inspire profundamente pelo nariz e expire fazendo som 'ahhhh'.",
-  "⭐ Respiração das estrelas: Inspire imaginando luz entrando, expire soltando tensões."
+  " 4-7-8: Inspire 4s, segure 7s, expire 8s. 3x",
+  "Respiração quadrada: Inspire 4s → Segure 4s → Expire 4s → Segure 4s. 5 ciclos",
+  " Respiração do oceano: Inspire profundamente e expire 'ahhhh'",
+  " Respiração das estrelas: Inspire luz, expire tensão"
 ]
 
 QUICK_MEDITATIONS = [
-  "🧘‍♀️ Feche os olhos e conte de 10 a 1, respirando entre cada número.",
-  "🌅 Visualize um lugar calmo e respire profundamente por 2 minutos.",
-  "🎵 Concentre-se apenas nos sons ao seu redor por 3 minutos.",
-  "💆‍♀️ Relaxe cada parte do corpo, começando pelos pés até a cabeça."
+  " Feche olhos e conte 10 a 1 respirando",
+  " Visualize lugar calmo e respire 2 min",
+  " Concentre-se nos sons por 3 min",
+  " Relaxe cada parte do corpo dos pés à cabeça"
 ]
 
 GOAL_TEMPLATES = [
@@ -117,16 +166,18 @@ AFFIRMATIONS = [
   "Confio na minha capacidade de tomar boas decisões! 🧠",
   "Sou grato pelas oportunidades que tenho! 🙏",
   "Minha energia positiva atrai coisas boas! 🌟",
-  "Aceito os desafios como oportunidades de crescimento! 🚀"
+  "Aceito os desafios como oportunidades de crescimento! 🚀",
+  "Minha vida tem valor e significado únicos! 💎",
+  "Eu sou merecedor(a) de amor e cuidado! ❤️"
 ]
 
 MOOD_TRACKER = {}
 
 # -----------------------
-# Helpers expandidos
+# Helpers
 # -----------------------
 helpers do
-  def system_message(text, type = "normal")
+  def system_message(text, type="normal")
     { name: "Cláudia", msg: text, time: Time.now.strftime("%H:%M"), type: type }
   end
 
@@ -134,51 +185,51 @@ helpers do
     { name: name, msg: text, time: Time.now.strftime("%H:%M"), type: "user" }
   end
 
-  def generate_response(msg)
-    sleep rand(1..3) # simula tempo de resposta natural
-
+  def detect_crisis_keywords(msg)
     msg_down = msg.downcase
 
+    suicide_words = ['suicid', 'me matar', 'não quero viver', 'quero morrer', 'acabar com tudo', 'não aguento mais', 'melhor morto', 'vou me matar', 'não vale a pena viver', 'cansei da vida', 'prefiro estar morto']
+    self_harm_words = ['me corto', 'me cortando', 'me machucar', 'me machuco', 'cortar o punho', 'autolesão', 'auto lesão', 'me ferir', 'me ferindo', 'lâmina', 'gilete']
+    hopeless_words = ['sem esperança', 'não há saída', 'sem solução', 'desespero total', 'não tem jeito', 'perdido na vida', 'sem sentido', 'vazio total']
+    loneliness_words = ['totalmente sozinho', 'ninguém me ama', 'completamente isolado', 'não tenho ninguém', 'abandonado por todos']
+
+    return :suicida if suicide_words.any? { |w| msg_down.include?(w) }
+    return :autolesao if self_harm_words.any? { |w| msg_down.include?(w) }
+    return :desesperanca if hopeless_words.any? { |w| msg_down.include?(w) }
+    return :solidao if loneliness_words.any? { |w| msg_down.include?(w) }
+
+    nil
+  end
+
+  def generate_response(msg)
+    sleep rand(1..2)
+    crisis_type = detect_crisis_keywords(msg)
+    return CUSTOM_RESPONSES[crisis_type].sample if crisis_type
+
+    msg_down = msg.downcase
     case
-    when msg_down.match?(/triste|depressivo|mal|down/)
-      CUSTOM_RESPONSES[:triste].sample
-    when msg_down.match?(/cansado|exausto|desanimado|tired/)
-      CUSTOM_RESPONSES[:cansado].sample
-    when msg_down.match?(/feliz|animado|alegre|happy|bem/)
-      CUSTOM_RESPONSES[:feliz].sample
-    when msg_down.match?(/ansioso|preocupado|nervoso|anxiety/)
-      CUSTOM_RESPONSES[:ansioso].sample
-    when msg_down.match?(/confuso|perdido|não sei|dúvida/)
-      CUSTOM_RESPONSES[:confuso].sample
-    when msg_down.match?(/estressado|irritado|raiva|stress/)
-      CUSTOM_RESPONSES[:estressado].sample
-    when msg_down.match?(/motivado|energizado|determinado/)
-      CUSTOM_RESPONSES[:motivado].sample
-    when msg_down.match?(/obrigado|obrigada|agradec|grato|grata/)
-      CUSTOM_RESPONSES[:agradecido].sample
-    else
-      MOTIVATIONAL_QUOTES.sample
+    when msg_down.match?(/triste|depressivo|mal|down/) then CUSTOM_RESPONSES[:triste].sample
+    when msg_down.match?(/cansado|exausto|desanimado|tired/) then CUSTOM_RESPONSES[:cansado].sample
+    when msg_down.match?(/feliz|animado|alegre|happy|bem/) then CUSTOM_RESPONSES[:feliz].sample
+    when msg_down.match?(/ansioso|preocupado|nervoso|anxiety/) then CUSTOM_RESPONSES[:ansioso].sample
+    when msg_down.match?(/confuso|perdido|não sei|dúvida/) then CUSTOM_RESPONSES[:confuso].sample
+    when msg_down.match?(/estressado|irritado|raiva|stress/) then CUSTOM_RESPONSES[:estressado].sample
+    when msg_down.match?(/motivado|energizado|determinado/) then CUSTOM_RESPONSES[:motivado].sample
+    when msg_down.match?(/obrigado|obrigada|agradec|grato|grata/) then CUSTOM_RESPONSES[:agradecido].sample
+    else MOTIVATIONAL_QUOTES.sample
     end
   end
 
-  def daily_tip
-    DAILY_TIPS.sample
-  end
-
-  def breathing_exercise
-    BREATHING_EXERCISES.sample
-  end
-
-  def quick_meditation
-    QUICK_MEDITATIONS.sample
-  end
-
-  def random_affirmation
-    AFFIRMATIONS.sample
-  end
+  def daily_tip; DAILY_TIPS.sample; end
+  def breathing_exercise; BREATHING_EXERCISES.sample; end
+  def quick_meditation; QUICK_MEDITATIONS.sample; end
+  def random_affirmation; AFFIRMATIONS.sample; end
+  def crisis_alternative; CRISIS_ALTERNATIVES.sample; end
+  def positive_distraction; POSITIVE_DISTRACTIONS.sample; end
+  def emergency_contacts; EMERGENCY_CONTACTS.values.join("\n"); end
 
   def mood_check_in
-    "Como você se sente numa escala de 1-10? 1 sendo muito mal e 10 sendo excelente! 📊"
+    "Como você se sente numa escala de 1-10? 1 sendo muito mal e 10 excelente! "
   end
 
   def save_mood(user, rating)
@@ -188,50 +239,39 @@ helpers do
   end
 
   def get_mood_trend(user)
-    return "Ainda não temos dados suficientes! Continue registrando seu humor. 📈" unless MOOD_TRACKER[user]
-    
+    return "Ainda não temos dados suficientes! Continue registrando. " unless MOOD_TRACKER[user]
+
     recent_moods = MOOD_TRACKER[user].values.last(7)
-    return "Registre seu humor por mais alguns dias! 📊" if recent_moods.length < 3
-    
+    return "Registre seu humor por mais alguns dias! " if recent_moods.length < 3
+
     avg = recent_moods.sum.to_f / recent_moods.length
     case avg
-    when 8..10
-      "Seu humor tem estado ótimo! Continue assim! 😄⬆️"
-    when 6..7.9
-      "Seu humor está numa boa média! 😊➡️"
-    when 4..5.9
-      "Seu humor tem oscilado. Que tal algumas dicas para melhorar? 😐📈"
-    else
-      "Percebi que você não tem se sentido muito bem. Vamos trabalhar nisso juntos! 🤗💪"
+    when 8..10 then "Seu humor tem estado ótimo! "
+    when 6..7.9 then "Seu humor está numa boa média! "
+    when 4..5.9 then "Seu humor tem oscilado. Que tal algumas dicas para melhorar? "
+    when 1..3.9 then "Você não tem se sentido muito bem. Converse com alguém de confiança ou ligue para o CVV: 188. "
     end
   end
 
   def generate_goal_suggestion
-    GOAL_TEMPLATES.sample + "[escreva aqui seu objetivo] 🎯"
+    GOAL_TEMPLATES.sample + "[escreva aqui seu objetivo] "
   end
 
   def get_encouragement_by_time
     hour = Time.now.hour
     case hour
-    when 5..11
-      "Bom dia! ☀️ Que tal começar o dia com energia positiva?"
-    when 12..17
-      "Boa tarde! 🌤️ Como está sendo seu dia? Continue firme!"
-    when 18..21
-      "Boa noite! 🌅 Hora de relaxar e refletir sobre as conquistas do dia!"
-    else
-      "Que horas são essas acordado? 🌙 Lembre-se de descansar bem!"
+    when 5..11 then "Bom dia! ☀️ Comece o dia com energia positiva!"
+    when 12..17 then "Boa tarde!  Continue firme!"
+    when 18..21 then "Boa noite!  Hora de relaxar e refletir!"
+    else "Que horas são essas acordado?  Lembre-se de descansar!"
     end
   end
 end
 
-# -----------------------
-# Rotas expandidas
-# -----------------------
 get '/' do
   session[:messages] ||= []
   if session[:messages].empty?
-    welcome_msg = "Bem-vindo ao Chat Motivacional! #{get_encouragement_by_time} Como você está hoje? 🌟"
+    welcome_msg = "Bem-vindo ao Chat de Apoio Emocional! #{get_encouragement_by_time} Como você está hoje? \n\n Se estiver em crise, busque ajuda: CVV 188"
     session[:messages] << system_message(welcome_msg)
   end
   @messages = session[:messages].last(100)
@@ -241,116 +281,68 @@ end
 post '/send' do
   session[:messages] ||= []
   name = params[:name].strip
-  msg = params[:msg].strip
+  msg  = params[:msg].strip
 
   unless name.empty? || msg.empty?
     session[:messages] << user_message(name, msg)
-    
-    # Detecta comandos especiais
+
     if msg.downcase.match?(/humor|mood/) && msg.match(/(\d+)/)
       rating = msg.match(/(\d+)/)[1]
       save_mood(name, rating)
-      response = "Obrigada por compartilhar! Registrei seu humor como #{rating}/10. #{get_mood_trend(name)}"
+      response = "Humor registrado como #{rating}/10. #{get_mood_trend(name)}"
     else
       response = generate_response(msg)
     end
-    
+
     session[:messages] << system_message(response)
   end
 
   redirect '/'
 end
 
+
 get '/daily_tip' do
-  session[:messages] ||= []
-  tip = daily_tip
-  session[:messages] << system_message("💡 Dica do dia: #{tip}", "tip")
+  session[:messages] << system_message(" Dica do dia: #{daily_tip}", "tip")
   redirect '/'
 end
 
-# Novas rotas para funcionalidades expandidas
 get '/breathing' do
-  session[:messages] ||= []
-  exercise = breathing_exercise
-  session[:messages] << system_message("🌬️ Exercício de Respiração: #{exercise}", "exercise")
+  session[:messages] << system_message("Exercício: #{breathing_exercise}", "exercise")
   redirect '/'
 end
 
 get '/meditation' do
-  session[:messages] ||= []
-  meditation = quick_meditation
-  session[:messages] << system_message("🧘‍♀️ Meditação Rápida: #{meditation}", "meditation")
+  session[:messages] << system_message(" Meditação: #{quick_meditation}", "meditation")
   redirect '/'
 end
 
 get '/affirmation' do
-  session[:messages] ||= []
-  affirmation = random_affirmation
-  session[:messages] << system_message("✨ Afirmação Positiva: #{affirmation}", "affirmation")
+  session[:messages] << system_message(" Afirmação: #{random_affirmation}", "affirmation")
+  redirect '/'
+end
+
+get '/alternatives' do
+  session[:messages] << system_message(" Alternativa: #{crisis_alternative}", "alternative")
+  redirect '/'
+end
+
+get '/distraction' do
+  session[:messages] << system_message(" Atividade: #{positive_distraction}", "distraction")
   redirect '/'
 end
 
 get '/mood_check' do
-  session[:messages] ||= []
-  check = mood_check_in
-  session[:messages] << system_message(check, "mood")
-  redirect '/'
-end
-
-get '/mood_trend' do
-  session[:messages] ||= []
-  name = params[:user] || "Usuario"
-  trend = get_mood_trend(name)
-  session[:messages] << system_message("📊 Análise do seu humor: #{trend}", "analysis")
+  session[:messages] << system_message(mood_check_in, "mood")
   redirect '/'
 end
 
 get '/goal' do
-  session[:messages] ||= []
-  suggestion = generate_goal_suggestion
-  session[:messages] << system_message("🎯 Defina uma meta: #{suggestion}", "goal")
+  session[:messages] << system_message(" Meta: #{generate_goal_suggestion}", "goal")
   redirect '/'
 end
 
 get '/encouragement' do
-  session[:messages] ||= []
-  encouragement = get_encouragement_by_time
-  session[:messages] << system_message(encouragement, "time_based")
-  redirect '/'
-end
-
-get '/motivation_combo' do
-  session[:messages] ||= []
-  combo = [
-    "🌟 Combo Motivacional:",
-    "1. #{random_affirmation}",
-    "2. #{daily_tip}",
-    "3. #{breathing_exercise}"
-  ].join("\n")
-  session[:messages] << system_message(combo, "combo")
-  redirect '/'
-end
-
-get '/stats' do
-  session[:messages] ||= []
-  total_msgs = session[:messages].select { |m| m[:name] != "Cláudia" }.length
-  stats = "📈 Suas estatísticas: #{total_msgs} mensagens enviadas hoje! Continue se expressando!"
-  session[:messages] << system_message(stats, "stats")
-  redirect '/'
-end
-
-# Rota para SOS - ajuda imediata
-get '/sos' do
-  session[:messages] ||= []
-  sos_msg = [
-    "🆘 Estou aqui para você! Vamos fazer o seguinte:",
-    "1. Respire fundo (4 segundos inspirando, 6 expirando)",
-    "2. Beba um copo de água 💧",
-    "3. Se possível, saia ao ar livre por 5 minutos 🌱",
-    "4. Lembre-se: este momento difícil vai passar! 💪",
-    "Você não está sozinho(a)! ❤️"
-  ].join("\n")
-  session[:messages] << system_message(sos_msg, "sos")
+  session[:messages] << system_message(get_encouragement_by_time, "time_based")
   redirect '/'
 end
 
@@ -359,7 +351,7 @@ get '/clear' do
   redirect '/'
 end
 
-# API endpoints para funcionalidades avançadas
+
 get '/api/mood_data' do
   content_type :json
   user = params[:user] || "Usuario"
